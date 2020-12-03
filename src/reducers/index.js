@@ -7,11 +7,11 @@ import { songListReducer } from "./songListReducer";
 import { libraryStatusReducer } from "./libraryStatusReducer";
 
 const allReducers = combineReducers({
-    currentSong: currentSongReducer,
-    isPlaying: isPlayingReducer,
-    audioPlayer: audioPlayerReducer,
-    songList: songListReducer,
-    libraryStatus: libraryStatusReducer
+  currentSong: currentSongReducer,
+  isPlaying: isPlayingReducer,
+  audioPlayer: audioPlayerReducer,
+  songList: songListReducer,
+  libraryStatus: libraryStatusReducer,
 });
 
 export default allReducers;

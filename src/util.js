@@ -104,6 +104,6 @@ const chillHop = () => {
     },
     //ADD MORE HERE
   ];
-}
+};
 
 export default chillHop;

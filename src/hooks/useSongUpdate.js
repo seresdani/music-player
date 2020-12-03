@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentSong, setSongList } from "../actions";
 
-const LibrarySong = ({ song }) => {
+export const useSongUpdate = () => {
   const dispatch = useDispatch();
-  const audioPlayer = useSelector((state) => state.audioPlayer);
-  const isPlaying = useSelector((state) => state.isPlaying);
   const songList = useSelector((state) => state.songList);
-  const songUpdateHandler = () => {
+  const isPlaying = useSelector((state) => state.isPlaying);
+  const audioPlayer = useSelector((state) => state.audioPlayer);
+
+  const updateSong = (song) => {
     dispatch(
       setSongList(
         songList.map((s) => {
@@ -15,6 +16,7 @@ const LibrarySong = ({ song }) => {
       )
     );
     dispatch(setCurrentSong({ ...song, active: true }));
+
     if (isPlaying) {
       const playPromise = audioPlayer.play();
       if (playPromise !== undefined) {
@@ -24,18 +26,6 @@ const LibrarySong = ({ song }) => {
       }
     }
   };
-  return (
-    <div
-      className={`library-song ${song.active ? "selected" : ""}`}
-      onClick={songUpdateHandler}
-    >
-      <img src={song.cover} alt={song.name} />
-      <div className="song-description">
-        <h3>{song.name}</h3>
-        <h4>{song.artist}</h4>
-      </div>
-    </div>
-  );
-};
 
-export default LibrarySong;
+  return { updateSong };
+};

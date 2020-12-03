@@ -1,15 +1,14 @@
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Song = () => {
-    const currentSong = useSelector(state => state.currentSong);
-    return (
-        <div className="song-container">
-            <img alt={currentSong.name} src={currentSong.cover}></img>
-            <h2>{currentSong.name}</h2>
-            <h3>{currentSong.artist}</h3>
-        </div>
-    );
-    
+  const currentSong = useSelector((state) => state.currentSong);
+  return (
+    <div className="song-container">
+      <img alt={currentSong.name} src={currentSong.cover}></img>
+      <h2>{currentSong.name}</h2>
+      <h3>{currentSong.artist}</h3>
+    </div>
+  );
 };
 
 export default Song;

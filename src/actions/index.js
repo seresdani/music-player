@@ -1,4 +1,4 @@
-export * from "./isPlaying"; 
+export * from "./isPlaying";
 export * from "./currentSong";
 export * from "./audioPlayer";
 export * from "./currentSong";
