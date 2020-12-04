@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const chillHop = () => {
-  return [
+const chillHop = [
     {
       name: "Beaver Creek",
       cover:
@@ -104,6 +103,5 @@ const chillHop = () => {
     },
     //ADD MORE HERE
   ];
-};
 
 export default chillHop;

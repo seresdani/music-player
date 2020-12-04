@@ -71,19 +71,32 @@ const Player = () => {
     return moment(`${time / 60}:${time % 60}`, "mm:ss").format("mm:ss");
   };
 
+  const trackStyle = currentSong?.color?.length ? {
+      background: `linear-gradient(to right, ${currentSong?.color[0]}, ${currentSong?.color[1]})`
+  } : {};
+
+  const animateTrackStyle = {
+    transform: `translateX(${
+      (songInfo.currentTime / songInfo.duration) * 100
+    }%)`,
+  };
+
   return (
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          type="range"
-          min={0}
-          max={songInfo.duration}
-          value={songInfo.currentTime}
-          onChange={dragHandler}
-          onMouseDown={() => isPlaying && audioPlayer.pause()}
-          onMouseUp={() => isPlaying && audioPlayer.play()}
-        />
+        <div className="track" style={trackStyle} >
+          <input
+            type="range"
+            min={0}
+            max={songInfo.duration}
+            value={songInfo.currentTime}
+            onChange={dragHandler}
+            onMouseDown={() => isPlaying && audioPlayer.pause()}
+            onMouseUp={() => isPlaying && audioPlayer.play()}
+          />
+          <div className="animate-track" style={animateTrackStyle}></div>
+        </div>
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-control">
@@ -111,6 +124,7 @@ const Player = () => {
         src={currentSong.audio}
         onTimeUpdate={timeUpdateHandler}
         onLoadedMetadata={timeUpdateHandler}
+        onEnded={() => skipSongHandler("FORWARD")}
       ></audio>
     </div>
   );

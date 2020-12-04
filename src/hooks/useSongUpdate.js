@@ -7,7 +7,7 @@ export const useSongUpdate = () => {
   const isPlaying = useSelector((state) => state.isPlaying);
   const audioPlayer = useSelector((state) => state.audioPlayer);
 
-  const updateSong = (song) => {
+  const updateSong = async (song) => {
     dispatch(
       setSongList(
         songList.map((s) => {
@@ -15,16 +15,9 @@ export const useSongUpdate = () => {
         })
       )
     );
-    dispatch(setCurrentSong({ ...song, active: true }));
+    await dispatch(setCurrentSong({ ...song, active: true }));
 
-    if (isPlaying) {
-      const playPromise = audioPlayer.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          audioPlayer.play();
-        });
-      }
-    }
+    if (isPlaying) audioPlayer.play();
   };
 
   return { updateSong };
